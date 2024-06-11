@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lord Of The Rings card</title>
+</head>
+<body>
+    <main>
+        <h2 class="card-title"></h2>
+        <img class="card-img" src="" alt="Picture of a card of Lord Of The Rings" height="400">
+    </main>
+    <script>
+        async function fetchData() {
+            try {
+                const response = await fetch("https://ringsdb.com/api/public/cards/");
+                const responseJson = await response.json();
+                const card = responseJson[5];
+                const {name, imagesrc} = card;
+                const h2 = document.querySelector(".card-title");
+                const image = document.querySelector(".card-img");
+                h2.innerText = name;
+                image.setAttribute("src", `https://ringsdb.com/${imagesrc}`);
+            } catch (error) {
+                console.error(error);
+            }
+        }
+        fetchData();
+    </script>
+</body>
+</html>
